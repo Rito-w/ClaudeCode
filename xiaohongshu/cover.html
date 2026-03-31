@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1440px;
+    font-family: 'PingFang SC', 'Noto Sans SC', 'SF Pro', sans-serif;
+    background: #0a0e17;
+    overflow: hidden;
+    position: relative;
+  }
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .bg-glow1 {
+    position: absolute; width: 600px; height: 600px;
+    top: -100px; right: -100px;
+    background: radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+  .bg-glow2 {
+    position: absolute; width: 500px; height: 500px;
+    bottom: 100px; left: -100px;
+    background: radial-gradient(circle, rgba(56,189,248,0.12), transparent 70%);
+    border-radius: 50%;
+  }
+  .bg-glow3 {
+    position: absolute; width: 400px; height: 400px;
+    bottom: -50px; right: 50px;
+    background: radial-gradient(circle, rgba(251,146,60,0.1), transparent 70%);
+    border-radius: 50%;
+  }
+  .content {
+    position: relative; z-index: 10;
+    height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px;
+  }
+  .leak-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(239,68,68,0.15);
+    border: 2px solid rgba(239,68,68,0.6);
+    border-radius: 50px;
+    padding: 14px 36px;
+    margin-bottom: 50px;
+  }
+  .leak-badge .dot {
+    width: 12px; height: 12px;
+    background: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ef4444;
+  }
+  .leak-badge span {
+    color: #fca5a5;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 6px;
+  }
+  .title-line1 {
+    font-size: 88px;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .title-line2 {
+    font-size: 88px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #38bdf8, #a78bfa, #fb923c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    line-height: 1.15;
+    margin-bottom: 55px;
+  }
+  .subtitle {
+    font-size: 36px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    margin-bottom: 70px;
+    letter-spacing: 2px;
+  }
+  .feature-pills {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center;
+    max-width: 900px;
+  }
+  .pill {
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+  }
+  .pill.p1 { border-color: rgba(251,191,36,0.4); color: #fbbf24; }
+  .pill.p2 { border-color: rgba(139,92,246,0.4); color: #a78bfa; }
+  .pill.p3 { border-color: rgba(56,189,248,0.4); color: #38bdf8; }
+  .pill.p4 { border-color: rgba(52,211,153,0.4); color: #34d399; }
+  .pill.p5 { border-color: rgba(251,146,60,0.4); color: #fb923c; }
+  .pill.p6 { border-color: rgba(244,114,182,0.4); color: #f472b6; }
+  .pill.p7 { border-color: rgba(148,163,184,0.4); color: #94a3b8; }
+  .version {
+    position: absolute;
+    bottom: 50px;
+    font-size: 22px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+  }
+  .code-snippet {
+    position: absolute;
+    top: 90px; left: 60px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 18px;
+    color: rgba(56,189,248,0.2);
+    line-height: 1.6;
+  }
+  .code-snippet2 {
+    position: absolute;
+    bottom: 120px; right: 60px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 18px;
+    color: rgba(139,92,246,0.15);
+    line-height: 1.6;
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow1"></div>
+  <div class="bg-glow2"></div>
+  <div class="bg-glow3"></div>
+  <div class="code-snippet">
+    feature('KAIROS')<br>
+    feature('BUDDY')<br>
+    feature('ULTRAPLAN')<br>
+    feature('COORDINATOR_MODE')<br>
+    feature('VOICE_MODE')<br>
+    feature('BRIDGE_MODE')
+  </div>
+  <div class="code-snippet2">
+    const SleepTool = ...<br>
+    const PushNotificationTool = ...<br>
+    const SubscribePRTool = ...<br>
+    POLL_INTERVAL_MS = 3000<br>
+    ULTRAPLAN_TIMEOUT_MS = 30*60*1000
+  </div>
+  <div class="content">
+    <div class="leak-badge">
+      <div class="dot"></div>
+      <span>SOURCE MAP LEAKED</span>
+    </div>
+    <div class="title-line1">Claude Code</div>
+    <div class="title-line2">7 个隐藏功能</div>
+    <div class="subtitle">从 v2.1.88 源码中发现的秘密</div>
+    <div class="feature-pills">
+      <div class="pill p1">AI 电子宠物</div>
+      <div class="pill p2">永驻AI助手</div>
+      <div class="pill p3">云端规划</div>
+      <div class="pill p4">多Agent编排</div>
+      <div class="pill p5">远程控制</div>
+      <div class="pill p6">隐藏命令</div>
+      <div class="pill p7">秘密开关</div>
+    </div>
+  </div>
+  <div class="version">@anthropic-ai/claude-code v2.1.88 · restored from cli.js.map</div>
+</body>
+</html>

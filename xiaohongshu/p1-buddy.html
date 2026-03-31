@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1440px;
+    font-family: 'PingFang SC', 'Noto Sans SC', sans-serif;
+    background: #0a0e17;
+    overflow: hidden; position: relative;
+  }
+  .bg-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(251,191,36,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(251,191,36,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .glow { position: absolute; width: 500px; height: 500px; top: -80px; right: -80px; background: radial-gradient(circle, rgba(251,191,36,0.12), transparent 70%); border-radius: 50%; }
+  .glow2 { position: absolute; width: 400px; height: 400px; bottom: 50px; left: -50px; background: radial-gradient(circle, rgba(251,146,60,0.08), transparent 70%); border-radius: 50%; }
+  .content { position: relative; z-index: 10; padding: 70px 65px; height: 100%; display: flex; flex-direction: column; }
+  .page-num { font-size: 20px; color: rgba(255,255,255,0.25); letter-spacing: 2px; margin-bottom: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px; border-radius: 30px; font-size: 22px; font-weight: 700; margin-bottom: 30px; width: fit-content; background: rgba(251,191,36,0.12); border: 1.5px solid rgba(251,191,36,0.4); color: #fbbf24; }
+  .title { font-size: 64px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 12px; }
+  .title-accent { background: linear-gradient(135deg, #fbbf24, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .desc { font-size: 28px; color: rgba(255,255,255,0.45); margin-bottom: 45px; line-height: 1.5; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px 36px; margin-bottom: 20px; }
+  .card-title { font-size: 24px; font-weight: 700; color: #fbbf24; margin-bottom: 16px; letter-spacing: 1px; }
+  .card-body { font-size: 26px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .card-body strong { color: white; }
+  .hl { display: inline; padding: 2px 10px; border-radius: 6px; background: rgba(251,191,36,0.12); color: #fbbf24; font-family: 'SF Mono', monospace; font-size: 23px; }
+  .species-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+  .species-tag { padding: 8px 18px; border-radius: 20px; font-size: 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+  .rarity-bar { display: flex; align-items: center; gap: 14px; margin: 8px 0; }
+  .rarity-label { font-size: 23px; color: rgba(255,255,255,0.6); width: 90px; }
+  .rarity-track { flex: 1; height: 22px; background: rgba(255,255,255,0.06); border-radius: 11px; overflow: hidden; }
+  .rarity-fill { height: 100%; border-radius: 11px; }
+  .rarity-pct { font-size: 22px; color: rgba(255,255,255,0.4); width: 50px; text-align: right; }
+  .footer-note { position: absolute; bottom: 50px; left: 65px; right: 65px; font-size: 20px; color: rgba(255,255,255,0.2); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div><div class="glow"></div><div class="glow2"></div>
+  <div class="content">
+    <div class="page-num">01 / 07</div>
+    <div class="badge">EASTER EGG · 预计 2026 年 5 月上线</div>
+    <div class="title">BUDDY</div>
+    <div class="title" style="margin-bottom:0"><span class="title-accent">AI 电子宠物</span></div>
+    <div class="desc">类似拓麻歌子的 AI 伴侣，住在你的终端旁边</div>
+    <div class="card">
+      <div class="card-title">DETERMINISTIC GENERATION</div>
+      <div class="card-body">用 <span class="hl">Mulberry32 PRNG</span> + 你的 userId 哈希生成<br><strong>每人独一无二</strong>，无法修改配置伪造稀有度</div>
+    </div>
+    <div class="card">
+      <div class="card-title">18 种物种</div>
+      <div class="species-grid">
+        <div class="species-tag">鸭子</div><div class="species-tag">猫</div><div class="species-tag">龙</div><div class="species-tag">章鱼</div><div class="species-tag">猫头鹰</div><div class="species-tag">企鹅</div><div class="species-tag">幽灵</div><div class="species-tag">六角恐龙</div><div class="species-tag">卡比巴拉</div><div class="species-tag">仙人掌</div><div class="species-tag">机器人</div><div class="species-tag">蘑菇</div><div class="species-tag">胖墩</div><div class="species-tag">...</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">稀有度分布</div>
+      <div class="rarity-bar"><div class="rarity-label">普通</div><div class="rarity-track"><div class="rarity-fill" style="width:60%;background:linear-gradient(90deg,#6b7280,#9ca3af)"></div></div><div class="rarity-pct">60%</div></div>
+      <div class="rarity-bar"><div class="rarity-label">稀有</div><div class="rarity-track"><div class="rarity-fill" style="width:10%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div><div class="rarity-pct">10%</div></div>
+      <div class="rarity-bar"><div class="rarity-label">史诗</div><div class="rarity-track"><div class="rarity-fill" style="width:4%;background:linear-gradient(90deg,#a855f7,#c084fc)"></div></div><div class="rarity-pct">4%</div></div>
+      <div class="rarity-bar"><div class="rarity-label">传说</div><div class="rarity-track"><div class="rarity-fill" style="width:1.5%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div></div><div class="rarity-pct">1%</div></div>
+      <div class="card-body" style="margin-top:12px;font-size:24px;color:rgba(255,255,255,0.5)">+ 6种眼型 · 8种帽子 · 5项属性 · <strong style="color:#fbbf24">1% 闪光概率</strong></div>
+    </div>
+  </div>
+  <div class="footer-note">source: @anthropic-ai/claude-code v2.1.88 · restored-src/src/buddy/</div>
+</body>
+</html>

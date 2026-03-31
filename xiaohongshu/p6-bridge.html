@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1440px; font-family: 'PingFang SC', 'Noto Sans SC', sans-serif; background: #0a0e17; overflow: hidden; position: relative; }
+  .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(244,114,182,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(244,114,182,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+  .glow { position: absolute; width: 500px; height: 500px; top: -80px; right: -80px; background: radial-gradient(circle, rgba(244,114,182,0.12), transparent 70%); border-radius: 50%; }
+  .glow2 { position: absolute; width: 400px; height: 400px; bottom: -50px; left: -50px; background: radial-gradient(circle, rgba(236,72,153,0.08), transparent 70%); border-radius: 50%; }
+  .content { position: relative; z-index: 10; padding: 70px 65px; height: 100%; display: flex; flex-direction: column; }
+  .page-num { font-size: 20px; color: rgba(255,255,255,0.25); letter-spacing: 2px; margin-bottom: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px; border-radius: 30px; font-size: 22px; font-weight: 700; margin-bottom: 30px; width: fit-content; background: rgba(244,114,182,0.12); border: 1.5px solid rgba(244,114,182,0.4); color: #f472b6; }
+  .title { font-size: 58px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 12px; }
+  .accent { background: linear-gradient(135deg, #f472b6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .desc { font-size: 28px; color: rgba(255,255,255,0.45); margin-bottom: 40px; line-height: 1.5; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 28px 36px; margin-bottom: 18px; }
+  .card-title { font-size: 23px; font-weight: 700; color: #f472b6; margin-bottom: 14px; letter-spacing: 1px; }
+  .card-body { font-size: 25px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .card-body strong { color: white; }
+  .hl { display: inline; padding: 2px 10px; border-radius: 6px; background: rgba(244,114,182,0.12); color: #f472b6; font-family: 'SF Mono', monospace; font-size: 22px; }
+  .feature-list { list-style: none; padding: 0; }
+  .feature-list li { font-size: 24px; color: rgba(255,255,255,0.7); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 14px; line-height: 1.5; }
+  .feature-list li:last-child { border: none; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+  .footer-note { position: absolute; bottom: 50px; left: 65px; right: 65px; font-size: 20px; color: rgba(255,255,255,0.2); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div><div class="glow"></div><div class="glow2"></div>
+  <div class="content">
+    <div class="page-num">06 / 07</div>
+    <div class="badge">UNRELEASED · feature('BRIDGE_MODE')</div>
+    <div class="title">Bridge &</div>
+    <div class="title"><span class="accent">远程控制 + IPC</span></div>
+    <div class="desc">从浏览器控制本地 CLI + 跨会话进程间通信</div>
+    <div class="card">
+      <div class="card-title">BRIDGE - REMOTE CONTROL</div>
+      <div class="card-body">从 <strong>claude.ai / 移动端</strong> 远程控制本地终端</div>
+      <ul class="feature-list">
+        <li><div class="dot" style="background:#f472b6"></div><span class="hl">claude remote-control</span> 启动（别名：rc, remote, sync, bridge）</li>
+        <li><div class="dot" style="background:#f472b6"></div>连接 <span class="hl">/v1/environments/bridge</span> + long-poll + WebSocket</li>
+        <li><div class="dot" style="background:#f472b6"></div>UUID dedup · SSE 跨重启持久化 · <strong>can_use_tool</strong> 远程权限</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">UDS INBOX - 跨会话 IPC</div>
+      <div class="card-body">通过 <strong>Unix Domain Socket</strong> 跨 Claude 会话通信</div>
+      <ul class="feature-list">
+        <li><div class="dot" style="background:#a78bfa"></div><span class="hl">/peers</span> 命令列出当前所有活跃会话</li>
+        <li><div class="dot" style="background:#a78bfa"></div>读取 <span class="hl">~/.claude/sessions/{pid}.json</span> 发现会话</li>
+        <li><div class="dot" style="background:#a78bfa"></div>本地 peer + UDS 直连 + Bridge 远程会话</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">AUTO-DREAM - 后台记忆整理</div>
+      <div class="card-body">后台 forked subagent，只读 bash</div>
+      <ul class="feature-list">
+        <li><div class="dot" style="background:#34d399"></div>触发条件：距上次 > <strong>24h</strong> 且 > <strong>5 个会话</strong></li>
+        <li><div class="dot" style="background:#34d399"></div>四阶段：Orient → Gather → Consolidate → Prune</li>
+        <li><div class="dot" style="background:#34d399"></div>GrowthBook 门控 <span class="hl">tengu_onyx_plover</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-note">source: restored-src/src/bridge/ · src/services/autoDream/</div>
+</body>
+</html>

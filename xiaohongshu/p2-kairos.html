@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1440px; font-family: 'PingFang SC', 'Noto Sans SC', sans-serif; background: #0a0e17; overflow: hidden; position: relative; }
+  .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+  .glow { position: absolute; width: 500px; height: 500px; top: -80px; left: -80px; background: radial-gradient(circle, rgba(139,92,246,0.12), transparent 70%); border-radius: 50%; }
+  .glow2 { position: absolute; width: 400px; height: 400px; bottom: -50px; right: -50px; background: radial-gradient(circle, rgba(99,102,241,0.08), transparent 70%); border-radius: 50%; }
+  .content { position: relative; z-index: 10; padding: 70px 65px; height: 100%; display: flex; flex-direction: column; }
+  .page-num { font-size: 20px; color: rgba(255,255,255,0.25); letter-spacing: 2px; margin-bottom: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px; border-radius: 30px; font-size: 22px; font-weight: 700; margin-bottom: 30px; width: fit-content; background: rgba(139,92,246,0.12); border: 1.5px solid rgba(139,92,246,0.4); color: #a78bfa; }
+  .title { font-size: 64px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 12px; }
+  .accent { background: linear-gradient(135deg, #a78bfa, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .desc { font-size: 28px; color: rgba(255,255,255,0.45); margin-bottom: 40px; line-height: 1.5; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 28px 36px; margin-bottom: 18px; }
+  .card-title { font-size: 23px; font-weight: 700; color: #a78bfa; margin-bottom: 14px; letter-spacing: 1px; }
+  .card-body { font-size: 25px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .card-body strong { color: white; }
+  .hl { display: inline; padding: 2px 10px; border-radius: 6px; background: rgba(139,92,246,0.12); color: #a78bfa; font-family: 'SF Mono', monospace; font-size: 22px; }
+  .flow-row { display: flex; align-items: center; gap: 16px; margin: 14px 0; flex-wrap: wrap; }
+  .flow-step { padding: 12px 24px; border-radius: 14px; font-size: 24px; font-weight: 700; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); color: #c4b5fd; }
+  .flow-arrow { font-size: 28px; color: rgba(255,255,255,0.25); }
+  .feature-list { list-style: none; padding: 0; }
+  .feature-list li { font-size: 25px; color: rgba(255,255,255,0.7); padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 14px; line-height: 1.5; }
+  .feature-list li:last-child { border: none; }
+  .icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: rgba(139,92,246,0.15); color: #a78bfa; flex-shrink: 0; }
+  .footer-note { position: absolute; bottom: 50px; left: 65px; right: 65px; font-size: 20px; color: rgba(255,255,255,0.2); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div><div class="glow"></div><div class="glow2"></div>
+  <div class="content">
+    <div class="page-num">02 / 07</div>
+    <div class="badge">UNRELEASED · feature('KAIROS')</div>
+    <div class="title">KAIROS</div>
+    <div class="title" style="margin-bottom:0"><span class="accent">"永远在线" 的 Claude</span></div>
+    <div class="desc">跨会话持久化的长期自主 Agent</div>
+    <div class="card">
+      <div class="card-title">DAILY LOG + NIGHTLY DREAM</div>
+      <div class="card-body">每天追加日志到 <span class="hl">logs/YYYY/MM/DD.md</span><br>夜间自动"做梦"整理记忆：</div>
+      <div class="flow-row">
+        <div class="flow-step">Orient</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Gather</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Consolidate</div><div class="flow-arrow">→</div>
+        <div class="flow-step">Prune</div>
+      </div>
+      <div class="card-body" style="font-size:22px;color:rgba(255,255,255,0.4);margin-top:8px">只读 bash，不会改你的代码</div>
+    </div>
+    <div class="card">
+      <div class="card-title">PROACTIVE MODE</div>
+      <div class="card-body">通过 <span class="hl">&lt;tick&gt;</span> 提示定期唤醒<br><strong>Claude 自己决定做什么</strong>，没活干就 Sleep<br>15秒阻塞预算，超时命令<strong>自动后台化</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-title">EXCLUSIVE TOOLS</div>
+      <ul class="feature-list">
+        <li><div class="icon">F</div> SendUserFile — 发送文件给用户</li>
+        <li><div class="icon">P</div> PushNotification — 推送通知</li>
+        <li><div class="icon">G</div> SubscribePR — GitHub PR 事件订阅</li>
+        <li><div class="icon">S</div> SleepTool — 等待唤醒，1次/醒 API调用</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-note">source: restored-src/src/assistant/ · src/proactive/ · src/tools/SleepTool/</div>
+</body>
+</html>

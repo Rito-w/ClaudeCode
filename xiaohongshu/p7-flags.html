@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1440px; font-family: 'PingFang SC', 'Noto Sans SC', sans-serif; background: #0a0e17; overflow: hidden; position: relative; }
+  .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(148,163,184,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+  .glow { position: absolute; width: 500px; height: 500px; top: -80px; left: 200px; background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%); border-radius: 50%; }
+  .glow2 { position: absolute; width: 400px; height: 400px; bottom: 100px; right: -50px; background: radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%); border-radius: 50%; }
+  .content { position: relative; z-index: 10; padding: 70px 65px; height: 100%; display: flex; flex-direction: column; }
+  .page-num { font-size: 20px; color: rgba(255,255,255,0.25); letter-spacing: 2px; margin-bottom: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px; border-radius: 30px; font-size: 22px; font-weight: 700; margin-bottom: 30px; width: fit-content; background: rgba(148,163,184,0.12); border: 1.5px solid rgba(148,163,184,0.4); color: #94a3b8; }
+  .title { font-size: 60px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 12px; }
+  .accent { background: linear-gradient(135deg, #94a3b8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .desc { font-size: 28px; color: rgba(255,255,255,0.45); margin-bottom: 35px; line-height: 1.5; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 26px 36px; margin-bottom: 16px; }
+  .card-title { font-size: 22px; font-weight: 700; color: #818cf8; margin-bottom: 12px; letter-spacing: 1px; }
+  .card-body { font-size: 24px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .card-body strong { color: white; }
+  .hl { display: inline; padding: 2px 10px; border-radius: 6px; background: rgba(129,140,248,0.12); color: #818cf8; font-family: 'SF Mono', monospace; font-size: 21px; }
+  .flag-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .flag { padding: 8px 16px; border-radius: 10px; font-size: 19px; font-family: 'SF Mono', monospace; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+  .flag.hot { color: #fbbf24; border-color: rgba(251,191,36,0.3); }
+  .flag.cool { color: #38bdf8; border-color: rgba(56,189,248,0.3); }
+  .flag.pink { color: #f472b6; border-color: rgba(244,114,182,0.3); }
+  .flag.green { color: #34d399; border-color: rgba(52,211,153,0.3); }
+  .flag.purple { color: #a78bfa; border-color: rgba(139,92,246,0.3); }
+  .flag.gray { color: #94a3b8; border-color: rgba(148,163,184,0.3); }
+  .section-label { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 2px; margin: 14px 0 8px; }
+  .gate-list { list-style: none; padding: 0; }
+  .gate-list li { font-size: 22px; color: rgba(255,255,255,0.6); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 12px; line-height: 1.4; }
+  .gate-list li:last-child { border: none; }
+  .gate-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .footer-note { position: absolute; bottom: 50px; left: 65px; right: 65px; font-size: 20px; color: rgba(255,255,255,0.2); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div><div class="glow"></div><div class="glow2"></div>
+  <div class="content">
+    <div class="page-num">07 / 07</div>
+    <div class="badge">COMPILED OUT · 32 feature flags</div>
+    <div class="title"><span class="accent">编译时特性开关</span></div>
+    <div class="title" style="font-size:56px"><span class="accent">& GrowthBook 远程门控</span></div>
+    <div class="desc">外部版本编译时移除，内部员工可用</div>
+    <div class="card">
+      <div class="card-title">BUILD-TIME FEATURE FLAGS (bun:bundle)</div>
+      <div class="section-label">MAJOR FEATURES</div>
+      <div class="flag-grid">
+        <div class="flag hot">KAIROS</div><div class="flag hot">BUDDY</div><div class="flag hot">ULTRAPLAN</div><div class="flag cool">COORDINATOR_MODE</div><div class="flag cool">BRIDGE_MODE</div><div class="flag cool">VOICE_MODE</div><div class="flag pink">PROACTIVE</div><div class="flag pink">DAEMON</div>
+      </div>
+      <div class="section-label">CONTEXT & COMPACTION</div>
+      <div class="flag-grid">
+        <div class="flag green">REACTIVE_COMPACT</div><div class="flag green">CONTEXT_COLLAPSE</div><div class="flag green">HISTORY_SNIP</div><div class="flag green">CACHED_MICROCOMPACT</div><div class="flag green">TOKEN_BUDGET</div>
+      </div>
+      <div class="section-label">SAFETY & ML</div>
+      <div class="flag-grid">
+        <div class="flag purple">BASH_CLASSIFIER</div><div class="flag purple">TRANSCRIPT_CLASSIFIER</div><div class="flag purple">TREE_SITTER_BASH_SHADOW</div><div class="flag gray">CHICAGO_MCP</div><div class="flag gray">WORKFLOW_SCRIPTS</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">GROWTHBOOK REMOTE GATES (tengu_*)</div>
+      <ul class="gate-list">
+        <li><div class="gate-dot" style="background:#fbbf24"></div><span class="hl">tengu_kairos</span> — KAIROS 运行时入口</li>
+        <li><div class="gate-dot" style="background:#38bdf8"></div><span class="hl">tengu_ultraplan_model</span> — 远程规划模型选择</li>
+        <li><div class="gate-dot" style="background:#34d399"></div><span class="hl">tengu_scratch</span> — Scratchpad 共享目录</li>
+        <li><div class="gate-dot" style="background:#f472b6"></div><span class="hl">tengu_cobalt_raccoon</span> — 响应式压缩</li>
+        <li><div class="gate-dot" style="background:#a78bfa"></div><span class="hl">tengu_onyx_plover</span> — Auto-Dream 调度</li>
+        <li><div class="gate-dot" style="background:#94a3b8"></div><span class="hl">tengu_ccr_mirror</span> — 会话云端镜像</li>
+        <li><div class="gate-dot" style="background:#fb923c"></div><span class="hl">tengu_portal_quail</span> — 记忆提取路径</li>
+      </ul>
+    </div>
+    <div class="card" style="background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.15)">
+      <div class="card-title" style="color:#ef4444">KEY TAKEAWAY</div>
+      <div class="card-body"><strong>外部 npm 包只是冰山一角</strong><br><span style="font-size:22px;color:rgba(255,255,255,0.5)">32 个 feature flag + 大量 GrowthBook 门控 = Anthropic 内部有一个功能远比公开版丰富的 Claude Code</span></div>
+    </div>
+  </div>
+  <div class="footer-note">source: restored-src/src/ · 1,884 files · 32 feature flags · 120+ env vars</div>
+</body>
+</html>

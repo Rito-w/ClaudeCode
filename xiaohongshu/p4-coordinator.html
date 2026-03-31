@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1440px; font-family: 'PingFang SC', 'Noto Sans SC', sans-serif; background: #0a0e17; overflow: hidden; position: relative; }
+  .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(52,211,153,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(52,211,153,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+  .glow { position: absolute; width: 500px; height: 500px; top: 100px; right: -100px; background: radial-gradient(circle, rgba(52,211,153,0.12), transparent 70%); border-radius: 50%; }
+  .glow2 { position: absolute; width: 400px; height: 400px; bottom: -50px; left: -50px; background: radial-gradient(circle, rgba(16,185,129,0.08), transparent 70%); border-radius: 50%; }
+  .content { position: relative; z-index: 10; padding: 70px 65px; height: 100%; display: flex; flex-direction: column; }
+  .page-num { font-size: 20px; color: rgba(255,255,255,0.25); letter-spacing: 2px; margin-bottom: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px; border-radius: 30px; font-size: 22px; font-weight: 700; margin-bottom: 30px; width: fit-content; background: rgba(52,211,153,0.12); border: 1.5px solid rgba(52,211,153,0.4); color: #34d399; }
+  .title { font-size: 64px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 12px; }
+  .accent { background: linear-gradient(135deg, #34d399, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .desc { font-size: 28px; color: rgba(255,255,255,0.45); margin-bottom: 40px; line-height: 1.5; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 28px 36px; margin-bottom: 18px; }
+  .card-title { font-size: 23px; font-weight: 700; color: #34d399; margin-bottom: 14px; letter-spacing: 1px; }
+  .card-body { font-size: 25px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .card-body strong { color: white; }
+  .hl { display: inline; padding: 2px 10px; border-radius: 6px; background: rgba(52,211,153,0.12); color: #34d399; font-family: 'SF Mono', monospace; font-size: 22px; }
+  .arch-diagram { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 16px 0; }
+  .arch-box { width: 100%; padding: 18px 28px; border-radius: 14px; text-align: center; }
+  .arch-master { background: rgba(52,211,153,0.12); border: 2px solid rgba(52,211,153,0.4); color: #34d399; font-size: 26px; font-weight: 700; }
+  .arch-connector { display: flex; justify-content: center; gap: 80px; padding: 10px 0; color: rgba(255,255,255,0.2); font-size: 24px; }
+  .arch-workers { display: flex; gap: 14px; width: 100%; }
+  .arch-worker { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px; text-align: center; }
+  .arch-worker-label { font-size: 20px; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+  .arch-worker-desc { font-size: 18px; color: rgba(255,255,255,0.35); }
+  .phase-row { display: flex; gap: 12px; margin-top: 14px; }
+  .phase { flex: 1; padding: 14px 10px; border-radius: 12px; text-align: center; font-size: 20px; font-weight: 700; }
+  .phase-num { font-size: 16px; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+  .code-block { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px 24px; margin-top: 14px; font-family: 'SF Mono', monospace; font-size: 20px; line-height: 1.7; color: rgba(255,255,255,0.5); }
+  .code-block .comment { color: rgba(255,255,255,0.25); }
+  .code-block .str { color: #34d399; }
+  .footer-note { position: absolute; bottom: 50px; left: 65px; right: 65px; font-size: 20px; color: rgba(255,255,255,0.2); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div><div class="glow"></div><div class="glow2"></div>
+  <div class="content">
+    <div class="page-num">04 / 07</div>
+    <div class="badge">ENV · CLAUDE_CODE_COORDINATOR_MODE=1</div>
+    <div class="title">Coordinator</div>
+    <div class="title" style="margin-bottom:0"><span class="accent">多 Agent 编排器</span></div>
+    <div class="desc">主 Claude 变成纯编排者，所有实际工作交给 Worker</div>
+    <div class="card">
+      <div class="card-title">ARCHITECTURE</div>
+      <div class="arch-diagram">
+        <div class="arch-box arch-master">Coordinator（只有 3 个工具：Agent · SendMessage · TaskStop）</div>
+        <div class="arch-connector">↓ &nbsp;&nbsp;&nbsp;&nbsp; ↓ &nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+        <div class="arch-workers">
+          <div class="arch-worker"><div class="arch-worker-label">Worker 1</div><div class="arch-worker-desc">Research</div></div>
+          <div class="arch-worker"><div class="arch-worker-label">Worker 2</div><div class="arch-worker-desc">Implement</div></div>
+          <div class="arch-worker"><div class="arch-worker-label">Worker 3</div><div class="arch-worker-desc">Verify</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">FOUR-PHASE WORKFLOW</div>
+      <div class="phase-row">
+        <div class="phase" style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:#38bdf8"><div class="phase-num">Phase 1</div>Research</div>
+        <div class="phase" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#a78bfa"><div class="phase-num">Phase 2</div>Synthesis</div>
+        <div class="phase" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);color:#34d399"><div class="phase-num">Phase 3</div>Implement</div>
+        <div class="phase" style="background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.3);color:#fb923c"><div class="phase-num">Phase 4</div>Verify</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">CORE PRINCIPLE</div>
+      <div class="card-body"><strong>"先理解再委派"</strong> — 禁止写 "based on your findings"</div>
+      <div class="code-block">
+        <span class="comment">// BAD - 把理解委派给 Worker</span><br>
+        Agent({ prompt: <span class="str">"Based on your findings, fix it"</span> })<br><br>
+        <span class="comment">// GOOD - Coordinator 先理解，再精确指派</span><br>
+        Agent({ prompt: <span class="str">"Fix null pointer in<br>&nbsp;&nbsp;src/auth/validate.ts:42..."</span> })
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">SCRATCHPAD</div>
+      <div class="card-body">Workers 共享 <span class="hl">/tmp/claude-{uid}/scratchpad/</span><br><span style="font-size:22px;color:rgba(255,255,255,0.4)">无需权限提示，自由读写中间结果</span></div>
+    </div>
+  </div>
+  <div class="footer-note">source: restored-src/src/coordinator/coordinatorMode.ts</div>
+</body>
+</html>
